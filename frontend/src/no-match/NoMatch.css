@@ -1,0 +1,38 @@
+.error-page-not-found{
+     width: 100%;
+     height: calc(100% - 77.96px);
+     display: flex;
+     background-color: #FAC05E;
+     justify-content: center;
+}
+
+.title-page-not-found{
+     margin-top: 2rem;
+     color:  black;
+     font-family: 'Montserrat', sans-serif;
+     font-size: 1.5rem;
+     font-weight: 700;
+}
+
+.text-page-not-found{
+     font-family: 'Montserrat', sans-serif;
+     font-size: 1rem;
+     font-weight: 500;
+}
+
+.button-page-not-found{
+     font-family: 'Montserrat', sans-serif;
+     font-size: 1rem;
+     font-weight: 700;
+     cursor: pointer;
+     text-decoration: none;
+     color: black;
+}
+.button-page-not-found:hover, .button-page-not-found:active{
+     color: #585858;
+
+}
+
+.icon-broken{
+     width: 15vw;
+}

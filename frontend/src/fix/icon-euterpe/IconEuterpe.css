@@ -1,0 +1,4 @@
+.euterpe-name-hover:hover{
+     content: url('../../assets/images/header/euterpe-name-active.svg');
+     cursor: pointer;
+}

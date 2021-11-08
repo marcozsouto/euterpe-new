@@ -1,0 +1,16 @@
+.login-background{
+     width: 100%;
+     height: 100%;
+     background-color: black;
+}
+
+.login-header{
+     width: 100%;
+     height: 30%;
+     background-color: #f77b6e;
+}
+.login-header-overlay{
+     width: 100%;
+     height: 101%;
+     background-image: linear-gradient(rgba(0,0,0,.1),rgba(0,0,0,1));
+}

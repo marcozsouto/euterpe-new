@@ -1,0 +1,37 @@
+.header{
+     width: 100%;
+     position: relative;
+     background-color: black; 
+     display: flex;
+     justify-content: space-around;
+}
+
+.header-buttons{
+     display: flex;
+}
+
+.header-button{
+     width: auto;
+     padding-top: 1.7rem !important;
+     padding-bottom: 1.7rem !important;
+     padding-right: 1rem !important;
+     padding-left: 1rem !important;
+}
+
+.a-button-header{
+     text-decoration: none;
+     color: white;
+     font-family: 'Montserrat', sans-serif;
+     font-size: 0.9rem;
+     font-weight: 700;
+}
+
+.a-button-header:hover{
+     cursor: pointer;
+     color: #F05E54;
+}
+
+.heade-icon{
+     height: fit-content;
+     padding-top: 1rem;
+}
