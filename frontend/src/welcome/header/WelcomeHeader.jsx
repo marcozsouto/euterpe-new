@@ -8,7 +8,7 @@ export default function WelcomeHeader() {
   return (
      <div className="header">
           <div className="heade-icon">
-               <IconEuterpe props={{width: 200, hover: true}}/>
+               <IconEuterpe props={{width: 150, hover: true}}/>
           </div>
           <div className="header-buttons">
                <div className="header-button">

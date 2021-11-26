@@ -1,12 +1,41 @@
-import React from "react";
+import React, { useEffect } from "react";
 import './Welcome.css'
-import iconAespa from '../assets/images/welcome/aespa.jpg';
 import WelcomeFooter from "./footer/WelcomeFooter";
 import WelcomeHeader from "./header/WelcomeHeader";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+const axios = require('axios');
 
+const Welcome = () => {
 
-export default function Welcome(){
+     const [info, setInfo] = React.useState();
+
+     useEffect(()=>{
+          async function getArtistCard(){
+               let html = [];
+               const response = await axios.post(`${process.env.REACT_APP_NODE_URL}artists/random`, {amount : 8});
+               if(response.data.status == 1){
+                    let icons = response.data.result
+                    icons.forEach(function(element, index) {
+                         if(index == parseInt(icons.length/2)){
+                              html.push(<div className="w-100"></div>);
+                         }
+                         html.push(
+                              <div className="artist">
+                                   <div className="artist-card">
+                                        <div className="artist-card-overlay"><h4 className="artist-card-overlay-text">Discover AESPA</h4></div>
+                                        <img width="250" src={element}/>
+                                   </div>
+                               </div>
+                         );
+                    });
+
+                    html.unshift(<div className="w-100 p-3"></div>);
+                    html.push(<div className="w-100 p-3"></div>);
+                    await setInfo(html);
+               }
+          }
+          getArtistCard();
+     }, []) 
+
      return (
           <>
           <WelcomeHeader/>
@@ -25,60 +54,12 @@ export default function Welcome(){
                          <div><h1 className="artists-sub-title">You can always listen to your favourites artists.</h1></div>
                     </div>
                     <div className="d-flex flex-wrap justify-content-center">
-                         <div className="w-100 p-3"></div>
-                         <div className="artist">
-                                   <div className="artist-card">
-                                        <div className="artist-card-overlay"><h4 className="artist-card-overlay-text">Discover AESPA</h4></div>
-                                        <img width="250" src={iconAespa}/>
-                                   </div>
-                         </div>
-                         <div className="artist">
-                                   <div className="artist-card">
-                                        <div className="artist-card-overlay"><h4 className="artist-card-overlay-text">Discover AESPA</h4></div>
-                                        <img width="250" src={iconAespa}/>
-                                   </div>
-                         </div>
-                         <div className="artist">
-                                   <div className="artist-card">
-                                        <div className="artist-card-overlay"><h4 className="artist-card-overlay-text">Discover AESPA</h4></div>
-                                        <img width="250" src={iconAespa}/>
-                                   </div>
-                         </div>
-                         <div className="artist">
-                                   <div className="artist-card">
-                                        <div className="artist-card-overlay"><h4 className="artist-card-overlay-text">Discover AESPA</h4></div>
-                                        <img width="250" src={iconAespa}/>
-                                   </div>
-                         </div>
-                         <div className="w-100"></div>
-                         <div className="artist">
-                                   <div className="artist-card">
-                                        <div className="artist-card-overlay"><h4 className="artist-card-overlay-text">Discover AESPA</h4></div>
-                                        <img width="250" src={iconAespa}/>
-                                   </div>
-                         </div>
-                         <div className="artist">
-                                   <div className="artist-card">
-                                        <div className="artist-card-overlay"><h4 className="artist-card-overlay-text">Discover AESPA</h4></div>
-                                        <img width="250" src={iconAespa}/>
-                                   </div>
-                         </div>
-                         <div className="artist">
-                                   <div className="artist-card">
-                                        <div className="artist-card-overlay"><h4 className="artist-card-overlay-text">Discover AESPA</h4></div>
-                                        <img width="250" src={iconAespa}/>
-                                   </div>
-                         </div>
-                         <div className="artist">
-                                   <div className="artist-card">
-                                        <div className="artist-card-overlay"><h4 className="artist-card-overlay-text">Discover AESPA</h4></div>
-                                        <img width="250" src={iconAespa}/>
-                                   </div>
-                         </div>
-                         <div className="w-100 p-3"></div>
+                         {info}
                     </div>
                </div>
           <WelcomeFooter/>
           </>
      );
 }
+
+export default Welcome;

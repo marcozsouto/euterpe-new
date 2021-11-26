@@ -14,3 +14,52 @@
      height: 101%;
      background-image: linear-gradient(rgba(0,0,0,.1),rgba(0,0,0,1));
 }
+
+.form-login{
+     width: 350px;
+     margin-top: 1rem;
+}
+
+.icon-login{
+     margin: auto;
+}
+
+.input-login{
+     border: 1px solid transparent;
+     border-radius: 5px;
+     margin-bottom: 0.5rem;
+     height: 40px;
+     font-weight: 500;
+     font-size: 0.9rem;
+}
+.input-login::placeholder{
+     color: gray;
+}
+
+.login-button{
+     font-weight: 600;
+     background-color: #F05E54;
+     border-color: #F05E54;
+     color: white;
+     font-size: 0.9rem;
+     padding: 5px 20px;
+}
+
+.footer-login{
+     border-top: solid 0.1rem gray;
+     margin-top: 1rem;
+     display: grid;
+     justify-content: center;
+     padding: 30px 0px;
+     font-size: 0.9rem;
+}
+
+.footer-login > a{
+     color: #F05E54 !important; 
+     font-weight: 600 !important;
+     text-decoration: none;
+}
+.footer-login > a:hover{
+     text-decoration: underline;
+}
+
