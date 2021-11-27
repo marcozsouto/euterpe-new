@@ -13,7 +13,7 @@ routes.post('/signup', UserController.signup);
 
 
 
-routes.post('/artists/random', Auth.authorization, ArtistController.random);
+routes.post('/artists/random', ArtistController.random);
 routes.post('/artists', ArtistController.store);
 routes.get('/artists', ArtistController.index);
 routes.get('/', (req, res) => {res.send({message: "Hello you're connected"})})

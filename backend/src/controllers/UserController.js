@@ -29,10 +29,10 @@ class UserController {
                     const token = jwt.sign(user, process.env.SECRET, {expiresIn: "24h"});
                     return res.json({status: 1, token: token});
                 }
-                throw { mensagem: `password incorrect`, status: -1, code: 400 }
+                throw { message: `password incorrect`, status: -1, code: 400 }
             } 
             
-            throw { mensagem: `login doesn't exist`, status: -1, code: 400 };
+            throw { message: `login doesn't exist`, status: -1, code: 400 };
             
         }catch(error){
             console.error(error);

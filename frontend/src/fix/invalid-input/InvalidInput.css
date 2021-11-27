@@ -1,0 +1,4 @@
+.invalid-feedback:first-letter {
+    text-transform: uppercase;
+    color: #EA1A1A;
+}

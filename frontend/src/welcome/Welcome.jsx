@@ -2,11 +2,13 @@ import React, { useEffect } from "react";
 import './Welcome.css'
 import WelcomeFooter from "./footer/WelcomeFooter";
 import WelcomeHeader from "./header/WelcomeHeader";
+import Auth from "../fix/Auth";
 const axios = require('axios');
 
 const Welcome = () => {
 
      const [info, setInfo] = React.useState();
+     const isLoggedIn = Auth.hasToken();
 
      useEffect(()=>{
           async function getArtistCard(){
@@ -42,17 +44,29 @@ const Welcome = () => {
                <div className="welcome">
                     <div className="welcome-divs">
                          <div className="welcome-div">
+                         {isLoggedIn ? (
+                              <>
+                              <h1 className="welcome-title">Get into it</h1>
+                              <h1 className="welcome-sub-title">Continue making story.</h1>
+                              <button className="btn welcome-button">OPEN WEB PLAYER</button>
+                              </>
+                         ) : (
+                              <>
                               <h1 className="welcome-title">Make Memories</h1>
                               <h1 className="welcome-sub-title">Go ahead, listen changes everthing.</h1>
                               <button className="btn welcome-button">START LISTENING</button>
+                              </>
+                         )}
                          </div>
                     </div>
                </div>
                <div className="artists d-flex flex-column flex-wrap justify-content-center">
+                    {!isLoggedIn ? (
                     <div className="d-inline-flex flex-column justify-content-center">
                          <div><h1 className="artists-title">Connect with Artists</h1></div>
                          <div><h1 className="artists-sub-title">You can always listen to your favourites artists.</h1></div>
                     </div>
+                         ) : (<></>)}
                     <div className="d-flex flex-wrap justify-content-center">
                          {info}
                     </div>
