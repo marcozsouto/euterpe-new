@@ -8,4 +8,4 @@ services:
     volumes:
       - ./:/srv/euterpe-front
     working_dir: /srv/euterpe-front
-    command: 'npm start'
+    command: bash -c "npm start"

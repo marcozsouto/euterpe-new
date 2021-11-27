@@ -5,14 +5,22 @@ const Artist = require('../models/Artist');
 class ArtistController {
      
      async store(req, res){
-          
-          const artist = await Artist.create(req.body);
-          return res.json(artist);
+          try{
+               const artist = await Artist.create(req.body);
+               return res.json(artist);
+          }catch(error){
+              return res.status(500).json(error);
+          }
+
      }
 
      async index(req, res){
-          const artists = await Artist.findAll();
-          return res.json(artists);
+          try{
+               const artists = await Artist.findAll();
+               return res.json(artists);
+          }catch(error){
+              return res.status(500).json(error);
+          }
      }
 
      async random(req, res){
@@ -21,17 +29,22 @@ class ArtistController {
                
                Validator.validateNumber(amount, false, "amount");
                let images = await FileReader.filesAt('images');
-
-               let result = [];
                
-               while(result.length != images.length){
+               let i =0, result = [];
+               
+               while(i != amount){
                     let random = images[Math.floor(Math.random()*images.length)];
                     if(!result.includes(random)){
                          result.push(random);
+                         i++;
                     }
                }
-               while(result.length != amount){
-                    result.push( images[Math.floor(Math.random()*images.length)]);
+               
+               
+               if(result.length < amount){
+                    while(result.length != amount){
+                         result.push( images[Math.floor(Math.random()*images.length)]);
+                    }
                }
 
                result = result.map(e=> `${process.env.BASE_URL}icon/${e}`);

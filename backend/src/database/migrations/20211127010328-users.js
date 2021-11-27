@@ -3,7 +3,7 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
 
-    return queryInterface.createTable('artists', { 
+    return queryInterface.createTable('users', { 
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -18,17 +18,31 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      followers: {
+      username: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true,
+      },
+      password: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      email: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true,
+      },
+      age: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      description: {
-        type: Sequelize.STRING,
+      birthdate: {
+        type: Sequelize.DATEONLY,
         allowNull: false,
       },
-      cover: {
-        type: Sequelize.STRING,
-        allowNull: false,
+      status: {
+        type: Sequelize.ENUM("activated", "disabled"),
+        defaultValue: "activated"
       },
       created_at: {
         type: Sequelize.DATE,
@@ -40,12 +54,10 @@ module.exports = {
       },
 
     });
-     
+
   },
 
   down: async (queryInterface, Sequelize) => {
-
-    await queryInterface.dropTable('artists');
-    
+    await queryInterface.dropTable('users');
   }
 };

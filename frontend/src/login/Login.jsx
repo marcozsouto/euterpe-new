@@ -18,7 +18,7 @@ export default function Login(){
                               <div className="form-login">
                                    <input className="input-login w-100" type="text" placeholder="Type your username or email"/>
                                    <input className="input-login w-100" type="password" placeholder="Type your password"/>
-                                   <div className="d-flex justify-content-end">
+                                   <div className="d-flex justify-content-end mt-3">
                                         <button className="btn login-button">Log in</button>
                                    </div>
                               </div>
