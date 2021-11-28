@@ -2,8 +2,9 @@ const Sequelize = require('sequelize');
 const Artist = require('../models/Artist');
 const User = require('../models/User');
 const databaseConfig = require('../config/database');
+const Playlist = require('../models/Playlist');
 
-const models = [Artist, User];
+const models = [Artist, User, Playlist];
 
 class Database{
      constructor(){
@@ -11,12 +12,12 @@ class Database{
      }
 
      init(){
-          this.connection =  new Sequelize(databaseConfig);
-          
-          models
-               .map(model => model.init(this.connection))
-               .map(model => model.associate && model.associate(this.connection.models))
-          
+          this.connection = new Sequelize(databaseConfig);
+          models.map((model) => model.init(this.connection))
+            .map((model) => {
+                if(model.associate) model.associate(this.connection.models);
+                return model;
+            })
      }
 }
 
