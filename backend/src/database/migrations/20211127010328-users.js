@@ -3,7 +3,7 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
 
-    return queryInterface.createTable('users', { 
+    return queryInterface.createTable('Users', { 
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -44,11 +44,11 @@ module.exports = {
         type: Sequelize.ENUM("activated", "disabled"),
         defaultValue: "activated"
       },
-      created_at: {
+      createdAt: {
         type: Sequelize.DATE,
         allowNull: false,
       },
-      updated_at: {
+      updatedAt: {
         type: Sequelize.DATE,
         allowNull: false,
       },
@@ -58,6 +58,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('users');
+    await queryInterface.dropTable('Users');
   }
 };

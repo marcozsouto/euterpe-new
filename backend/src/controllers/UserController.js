@@ -1,6 +1,7 @@
 const Encrpyt = require("../helpers/Encrpyt");
 const Validator = require("../helpers/Validator");
 const User = require("../models/User");
+const Playlist = require("../models/Playlist");
 const jwt = require('jsonwebtoken');
 const { Op  } = require("sequelize");
 
@@ -11,7 +12,6 @@ class UserController {
             Validator.validateString(req.body.login, [0, 255], "login");
             Validator.validateString(req.body.password, [0, 255], "password");
 
-            
             let user = await User.findAll({
                 where: {
                     [Op.or]: [
@@ -19,12 +19,17 @@ class UserController {
                       { email: req.body.login}
                     ]
                 },
-                raw : true
+                include: [
+                    {model: Playlist, as: "playlist", attributes: ['id']}
+                ],
+                nest: true
             });
+            
+            user = user.map((team) => team.get({ plain: true }));
 
             if(user.length == 1){ 
                 user = user[0];
-                
+                user.playlist = user.playlist.map(x => x.id);
                 if(await Encrpyt.compare(req.body.password, user.password)){
                     const token = jwt.sign(user, process.env.SECRET, {expiresIn: "24h"});
                     return res.json({status: 1, token: token});

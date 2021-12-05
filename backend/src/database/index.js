@@ -3,8 +3,10 @@ const Artist = require('../models/Artist');
 const User = require('../models/User');
 const databaseConfig = require('../config/database');
 const Playlist = require('../models/Playlist');
+const Music = require('../models/Music');
+const MusicPlaylist = require('../models/MusicPlaylist');
 
-const models = [Artist, User, Playlist];
+const models = [Artist, User, Playlist, Music, MusicPlaylist];
 
 class Database{
      constructor(){

@@ -4,14 +4,10 @@ module.exports = {
   "database": "euterpe",
   "host": "host.docker.internal",
   "dialect": "mysql",
+  "operatorsAliases": '1',
   "port": '3306',
   "autoreconnect": true,
-  dialectOptions: {
-    connectTimeout: 60000
-  },
   "define": {
     "timestamps": true,
-    "underscored": true,
-    "underscoredAll": true,
   }
 }

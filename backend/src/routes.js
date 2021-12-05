@@ -15,11 +15,14 @@ routes.post('/signup', UserController.signup);
 //Rotas Playlist
 routes.post('/playlist', Auth.authorization, PlaylistController.store);
 routes.get('/playlists', Auth.authorization, PlaylistController.show);
-
+routes.post('/playlist/add/music', Auth.authorization, PlaylistController.addToPlaylist);
 
 routes.post('/artists/random', ArtistController.random);
 routes.post('/artist', ArtistController.store);
 routes.get('/artist', ArtistController.index);
+
+
+
 
 routes.get('/', (req, res) => {res.send({message: "Hello you're connected"})})
 
