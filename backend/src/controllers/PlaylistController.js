@@ -29,7 +29,7 @@ class PlaylistController {
         try{
             let playlist = await Playlist.findAll({
                 attributes: [`name`, `description`, `icon`, `userId`, `createdAt`, `updatedAt`],   
-                where: {UserId: req.user.id}, 
+                where: {userId: req.user.id}, 
                 include: [
                     {model: User, as: "user", attributes: ['name', 'username']}, 
                     {model: Music, as: "musics", attributes: ['id', 'name', 'src', 'time'], through: {attributes: []}}
@@ -52,29 +52,28 @@ class PlaylistController {
 
     async addToPlaylist(req, res){
         try{
-            const {idMusic, idPlaylist} = req.body;
+            const {musicId, playlistId} = req.body;
             
-            Validator.validateNumber(idMusic, false, "idMusic");
-            Validator.validateNumber(idPlaylist, false, "idPlaylist");
+            Validator.validateNumber(musicId, false, "musicId");
+            Validator.validateNumber(playlistId, false, "playlistId");
             
-            
-            const music = await Music.findByPk(idMusic);
+            const music = await Music.findByPk(musicId);
             
             if(!music){
                 throw {status: -1, message: `music didn't find`}
             }else{
-                if(!req.user.playlist.includes(idPlaylist)){
+                if(!req.user.playlist.includes(playlistId)){
                     throw {status: -1, message: `the user is not allowed to add to this playlist`}
                 } 
                 
                 const relation = {
-                    idMusic: idMusic,
-                    idPlaylist: idPlaylist,
+                    musicId: musicId,
+                    playlistId: playlistId,
                 }
     
                 const musicPlaylist = await MusicPlaylist.create(relation);
 
-                return res.json({status: 1, message: "Sucess in association"});
+                return res.json({status: 1, message: "Success in association"});
             }
         }catch(error){
             return res.status(500).json(error);    

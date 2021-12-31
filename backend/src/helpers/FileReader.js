@@ -10,6 +10,12 @@ class FileReader{
             });
         });
     }
+
+    static remove(files){
+        for(var prop in files){
+            fs.unlinkSync(files[prop][0].path);
+        }
+    }
 }
 
 module.exports = FileReader;

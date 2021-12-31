@@ -8,13 +8,13 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      idPlaylist: {
+      playlistId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: { model: 'Playlists', key: 'id' },
         onDelete: 'CASCADE',
       },
-      idMusic: {
+      musicId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: { model: 'Music', key: 'id' },

@@ -7,7 +7,8 @@ class Playlist extends Sequelize.Model {
                 name: Sequelize.STRING,
                 description: Sequelize.STRING,
                 icon: Sequelize.STRING,
-                userId: Sequelize.INTEGER
+                userId: Sequelize.INTEGER,
+                artistId: Sequelize.INTEGER,
             },
             {
                 sequelize
@@ -15,14 +16,19 @@ class Playlist extends Sequelize.Model {
         );
         return this;
     }
-
+    
     static associate(models) {
         this.belongsTo(models.User, {
             foreignKey: 'userId', 
             as: 'user'
         });
 
-        this.belongsToMany(models.Music, { through: 'MusicPlaylists',  as: "musics", foreignKey: "idPlaylist" });
+        this.belongsTo(models.Artist, {
+            foreignKey: 'artistId', 
+            as: 'artist'
+        });
+
+        this.belongsToMany(models.Music, { through: 'MusicPlaylists',  as: "musics", foreignKey: "playlistId" });
     }
 
 }

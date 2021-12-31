@@ -1,6 +1,6 @@
 module.exports = {
   "username": "root",
-  "password": "Mv@811437",
+  "password": "root",
   "database": "euterpe",
   "host": "host.docker.internal",
   "dialect": "mysql",

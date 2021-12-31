@@ -4,8 +4,8 @@ class MusicPlaylist extends Sequelize.Model {
     static init(sequelize){
         super.init(
             {
-                idMusic: Sequelize.INTEGER,
-                idPlaylist: Sequelize.INTEGER,
+                musicId: Sequelize.INTEGER,
+                playlistId: Sequelize.INTEGER,
             },
             {
                 sequelize

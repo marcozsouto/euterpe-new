@@ -17,6 +17,10 @@ class Artist extends Sequelize.Model {
 
           return this;
      }
+
+     static associate(models) {
+          this.hasMany(models.Playlist, {as: 'playlist'});
+     }
 }
 
 module.exports = Artist;

@@ -18,10 +18,11 @@ class Music extends Sequelize.Model {
           return this;
      }
 
-    static associate(models) {
-        this.belongsToMany(models.Playlist, { through: 'MusicPlaylists',  as: "playlists", foreignKey: "idMusic"});
-        this.hasMany(models.Playlist, {as: 'playlist'});
-    }
+     static associate(models) {
+          this.belongsToMany(models.Playlist, { through: 'MusicPlaylists',  as: "playlists", foreignKey: "musicId"});
+
+          this.belongsToMany(models.Album, { through: 'MusicAlbums',  as: "albums", foreignKey: "musicId"});
+     }
 
 }
 
