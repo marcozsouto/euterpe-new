@@ -27,6 +27,11 @@ class Formater{
     static formatarDateNew(date){
         return String(date).slice(0, 15);
     }
+
+    static formatarTime(time){
+        time = new Date(time * 1000).toISOString().substr(11, 8).split(':');
+        return `${time[0]}h ${time[1]}min`;
+    }
 }
 
 module.exports = Formater;

@@ -33,6 +33,7 @@ module.exports = {
                tracks: 12,
                cover: 'sweetener.jpeg',
                time: 2700000,
+               date: new Date(),
                createdAt: new Date(),
                updatedAt: new Date()
           }], {});
@@ -78,6 +79,12 @@ module.exports = {
                updatedAt: new Date()
           }], {});
 
+          await queryInterface.bulkInsert('ArtistUsers', [{
+               artistId: 1,
+               userId: 1,
+               createdAt: new Date(),
+               updatedAt: new Date()
+          }], {});
      },
 
      down: async (queryInterface, Sequelize) => {
@@ -89,5 +96,6 @@ module.exports = {
           await queryInterface.bulkDelete('MusicPlaylists', null, {});
           await queryInterface.bulkDelete('MusicAlbums', null, {});
           await queryInterface.bulkDelete('AlbumUsers', null, {});
+          await queryInterface.bulkDelete('ArtistUsers', null, {});
      }
 };

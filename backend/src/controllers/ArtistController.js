@@ -2,12 +2,16 @@ const FileReader = require('../helpers/FileReader');
 const Validator = require('../helpers/Validator');
 const Artist = require('../models/Artist');
 const multer = require("multer");
-const multerConfig = require("../config/multer");
+const { image } = require("../config/multer");
+const Album = require('../models/Album');
+const Formater = require('../helpers/Formater');
+const Music = require('../models/Music');
+const User = require('../models/User');
 
 class ArtistController {
    
      uploadFile(req, res, next) {
-          const upload =  multer(multerConfig).fields([{name: "icon"},{name: "cover"}]); 
+          const upload =  multer(image).fields([{name: "icon"},{name: "cover"}]); 
 
           upload(req, res, function (err) {
                if (err instanceof multer.MulterError) {
@@ -43,9 +47,42 @@ class ArtistController {
 
      }
 
-     async index(req, res){
+     async show(req, res){
           try{
-               const artists = await Artist.findAll();
+               let {albums, musics} = req.query
+
+               let include = [
+                    albums == 'true' ? {
+                         model: Album, 
+                         as: "albums", 
+                         attributes: ['id', 'name', 'gender', 'tracks', 'cover', 'time', 'date'],
+                         include:  musics == 'true' &&  albums == 'true' ? [{
+                              model: Music,  
+                              as: "musics", 
+                              attributes: ['id', 'name', 'src', 'credits', 'time', 'gender'], 
+                              through: {attributes: []}
+                         }] : []
+                    } : null
+               ];
+
+               let artists = await Artist.findAll({
+                    attributes: [`id`,`name`, `description`, `icon`, `followers`, `cover`, `createdAt`],   
+                    include:  albums == 'true' ? include : [],
+                    nest: true
+               });
+               artists = artists.map((team) => team.get({ plain: true }));
+
+               artists = artists.map(p => { return {
+                    ...p, 
+                    createdAt: Formater.formatarDateNew(p.createdAt), 
+                    albums: albums == 'true' ? p.albums.map(pi => { return {
+                         ...pi,
+                         time: Formater.formatarTime(pi.time),
+                         date: Formater.formatarDateNew(pi.date),
+                    }}) : []
+               }});
+   
+
                return res.json(artists);
           }catch(error){
               return res.status(500).json(error);
@@ -62,30 +99,7 @@ class ArtistController {
 
      async random(req, res){
           try{
-               const { amount } = req.body;
-               
-               Validator.validateNumber(amount, false, "amount");
-               let images = await FileReader.filesAt('images');
-               
-               let i =0, result = [];
-               
-               while(i != amount){
-                    let random = images[Math.floor(Math.random()*images.length)];
-                    if(!result.includes(random)){
-                         result.push(random);
-                         i++;
-                    }
-               }
-               
-               
-               if(result.length < amount){
-                    while(result.length != amount){
-                         result.push( images[Math.floor(Math.random()*images.length)]);
-                    }
-               }
-
-               result = result.map(e=> `${process.env.BASE_URL}icon/${e}`);
-               return res.json({status: 1, result});
+               return res.json({status: 1});
           }catch(error){
                return res.status(500).json(error)
           }

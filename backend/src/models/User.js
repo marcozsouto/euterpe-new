@@ -28,6 +28,7 @@ class User extends Sequelize.Model {
           this.hasMany(models.Playlist, {as: 'playlist'});
 
           this.belongsToMany(models.Album, { through: 'AlbumUsers',  as: "albums", foreignKey: "userId" });
+          this.belongsToMany(models.Artist, { through: 'ArtistUsers',  as: "artists", foreignKey: "userId" });
      }
 
 }

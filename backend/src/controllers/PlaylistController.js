@@ -4,34 +4,50 @@ const User = require("../models/User");
 const Music = require('../models/Music');
 const MusicPlaylist = require('../models/MusicPlaylist');
 const Validator = require('../helpers/Validator');
+const { image } = require("../config/multer");
+const multer = require("multer");
+const FileReader = require("../helpers/FileReader");
 
 class PlaylistController {
-     
-    async store(req, res){
-    try{
-        let {name, description, icon} = req.body; 
-        
-        Validator.validateString(name, [0, 255], 'name');
-        Validator.validateString(description, [0, 255], 'description');
-        Validator.validateString(icon, [0, 255], 'icon');
-        req.body.userId = req.user.id;
-        
-        console.log(req.body);
-        const playlist = await Playlist.create(req.body);
-        return res.json(playlist);
-    }catch(error){
-        return res.status(500).json(error);
+    
+    uploadFile(req, res, next) {
+        const upload =  multer(image).fields([{name: "icon"}]); 
+
+        upload(req, res, function (err) {
+             if (err instanceof multer.MulterError) {
+                  return res.status(500).json({status: -1, code: 400, message: err.message});
+             } else if (err) {
+                  return res.status(500).json({status: -1, code: 400, message: err.message});
+             }
+            next();
+        })
     }
 
+    async store(req, res){
+        try{
+            let {name, description} = req.body; 
+
+            if(!req.files.icon) throw { message: `icon must be passed`, status: -1, code: 400 };
+            
+            Validator.validateString(name, [0, 255], 'name');
+            Validator.validateString(description, [0, 255], 'description');
+
+            req.body.icon = req.files.icon[0].path;
+            req.body.userId = req.user.id;
+            
+            const playlist = await Playlist.create(req.body);
+            return res.json(playlist);
+        }catch(error){
+            if(req.files) FileReader.remove(req.files);
+            return res.status(500).json(error);
+        }
     }
 
     async show(req, res){
         try{
             let playlist = await Playlist.findAll({
                 attributes: [`name`, `description`, `icon`, `userId`, `createdAt`, `updatedAt`],   
-                where: {userId: req.user.id}, 
                 include: [
-                    {model: User, as: "user", attributes: ['name', 'username']}, 
                     {model: Music, as: "musics", attributes: ['id', 'name', 'src', 'time'], through: {attributes: []}}
                 ],
                 nest: true
