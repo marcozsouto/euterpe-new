@@ -1,18 +1,16 @@
 import React, { useState } from 'react';
 import './WelcomeHeader.css';
 import { Link } from 'react-router-dom';
-import IconEuterpe from '../../fix/icon-euterpe/IconEuterpe';
+import IconEuterpe from '../../../fix/icon-euterpe/IconEuterpe';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowDown, faChevronDown } from '@fortawesome/free-solid-svg-icons'
-import Auth from '../../fix/Auth';
-
+import {  faChevronDown } from '@fortawesome/free-solid-svg-icons'
+import Auth from '../../../services/Auth';
+import IconAri from "../../../assets/images/ari.jpeg";
 
 export default function WelcomeHeader() {
      
      const isLoggedIn = Auth.hasToken();
      const [clickProf, setClickProf] = useState(false);
-
-
 
      function showModal(){
           setClickProf(clickProf ? false : true)
@@ -37,22 +35,23 @@ export default function WelcomeHeader() {
                     <span style={{color: 'white'}}>|</span>
                </div>
                <div className="header-button">
-                    <Link to={'*'} className="a-button-header">Sign in</Link>
+                    <Link to={'/signup'} className="a-button-header">Sign in</Link>
                </div>
                {isLoggedIn ? (
                <div className="header-button">
                     <div className="profile-buttom">
-                    <buttom className="a-button-header" onClick={() => showModal()}>
-                         Profile 
-                         <FontAwesomeIcon className={clickProf ? "round" : "normal"} icon={faChevronDown} style={{marginLeft: "0.5rem"}}/>
-                    </buttom>
-                    <div className="popup-all" style={{display: `${clickProf ? 'block': 'none'}`}}>
-                         <div id="triangle-up"></div>
-                         <div className="popup">
-                              <Link to={'*'} className="item-popup">Account</Link>
-                              <Link to={'*'} className="item-popup" style={{color: "gray"}}>Log out</Link>
+                         <buttom className="a-button-header" onClick={() => showModal()}>
+                              <img class="img-icon-user" src={IconAri}></img>
+                              Profile 
+                              <FontAwesomeIcon className={clickProf ? "round" : "normal"} icon={faChevronDown} style={{marginLeft: "0.5rem"}}/>
+                         </buttom>
+                         <div className="popup-all" style={{display: `${clickProf ? 'block': 'none'}`}}>
+                              <div id="triangle-up"></div>
+                              <div className="popup">
+                                   <Link to={'*'} className="item-popup">Account</Link>
+                                   <Link to={'*'} className="item-popup" style={{color: "gray"}}>Log out</Link>
+                              </div>
                          </div>
-                    </div>
                     </div>
                </div>
                ) : (

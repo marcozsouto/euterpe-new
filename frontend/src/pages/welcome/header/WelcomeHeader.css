@@ -12,10 +12,10 @@
 
 .header-button{
      width: auto;
-     padding-top: 1.7rem !important;
-     padding-bottom: 1.7rem !important;
-     padding-right: 1rem !important;
-     padding-left: 1rem !important;
+     margin-top: 1.7rem !important;
+     margin-bottom: 1.7rem !important;
+     margin-right: 1rem !important;
+     margin-left: 1rem !important;
 }
 
 .a-button-header{
@@ -37,11 +37,17 @@
 
 .round{
      transform: rotate(180deg);
+     transition-duration: 0.5s;
+}
+
+.normal{
+     transform: rotate(0deg);
+     transition-duration: 0.5s; 
 }
 
 .profile-buttom{
      position: relative;
-
+     top: -8px;
 }
 
 .popup{ 
@@ -49,7 +55,7 @@
     right: 0%;
     width: 150px;
     height: 80px;
-    top: 40px;
+    top: 45px;
     background-color: white;
     border-radius: 5px;
     border: 0;
@@ -79,4 +85,11 @@
 
 .item-popup:hover{
      color: #F05E54 !important;
+}
+
+.img-icon-user{
+     width: 50px;
+     height: 50px;
+     border-radius: 100%;
+     margin-right: 0.8rem;
 }

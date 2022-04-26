@@ -1,11 +1,12 @@
 version: '3'
 
 services:
-  node:
+  frontend:
     image: node:16
+    command: bash -c "npm install && npm start"
     ports:
       - '3000:3000'
     volumes:
       - ./:/srv/euterpe-front
     working_dir: /srv/euterpe-front
-    command: bash -c "npm start"
+ 

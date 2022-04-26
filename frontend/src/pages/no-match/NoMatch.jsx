@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import WelcomeFooter from "../welcome/footer/WelcomeFooter";
 import WelcomeHeader from "../welcome/header/WelcomeHeader";
-import iconBroken from '../assets/images/nomatch/broken.svg';
+import iconBroken from '../../assets/images/nomatch/broken.svg';
 import './NoMatch.css'
 
 export default function NoMatch(){

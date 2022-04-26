@@ -1,13 +1,15 @@
+import './Login.css';
+
 import React, { useState } from "react";
 import { Redirect } from 'react-router';
-import IconEuterpe from "../fix/icon-euterpe/IconEuterpe";
 import { Link } from 'react-router-dom';
-import InvalidInput from "../fix/invalid-input/InvalidInput";
-import Validator from "../fix/Validator";
-import IconLoading from "../fix/loading/IconLoading";
-import Auth from "../fix/Auth";
-import './Login.css'
-const axios = require('axios');
+
+import IconEuterpe from "../../fix/icon-euterpe/IconEuterpe";
+import InvalidInput from "../../fix/invalid-input/InvalidInput";
+import IconLoading from "../../fix/loading/IconLoading";
+import Auth from "../../services/Auth";
+import Validator from "../../services/Validator";
+import api from '../../services/Api';
 
 
 export default function Login() {
@@ -22,18 +24,18 @@ export default function Login() {
                setLoading(true);
                Validator.validateString(state.login, [0, 255], 'login');
                Validator.validateString(state.password, [0, 255], 'password');
-               const response = await axios.post(`${process.env.REACT_APP_NODE_URL}login`, state);
+               const response = await api.post(`/login`, state);
 
                if(response.data.status == 1){
                     let token = response.data.token;
                     Auth.setToken(token);
                }
           }catch(error){
-               
+
                if(error.status != undefined){
                     setMessage({text: error.message});
                }else{
-                    console.log(error.response.data.message);
+                    console.error(error.response.data.message);
                     setMessage({text: error.response.data.message});
                }
           }
@@ -61,7 +63,7 @@ export default function Login() {
                     <div className="login-header">
                          <div className="login-header-overlay"></div>
                     </div>
-                    <div className="d-flex justify-content-center">
+                    <div className="d-flex justify-content-center" style={{backgroundColor: 'black'}}>
                          <div className="d-flex flex-column">
                               <div className="icon-login">
                                    <IconEuterpe props={{width: 250,hover: true}}/>

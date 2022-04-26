@@ -16,7 +16,7 @@
 }
 
 .form-login{
-     width: 350px;
+     max-width: 350px;
      margin-top: 1rem;
 }
 
@@ -74,10 +74,3 @@
 .footer-login > a:hover{
      text-decoration: underline;
 }
-
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-     input[type="password"]:not(:placeholder-shown) {
-        -webkit-text-stroke-width: 0.2em;
-        letter-spacing: 0.2em;
-     }
- }

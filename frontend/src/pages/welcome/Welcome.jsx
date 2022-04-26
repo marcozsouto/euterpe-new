@@ -2,41 +2,40 @@ import React, { useEffect } from "react";
 import './Welcome.css'
 import WelcomeFooter from "./footer/WelcomeFooter";
 import WelcomeHeader from "./header/WelcomeHeader";
-import Auth from "../fix/Auth";
-const axios = require('axios');
+import Auth from "../../services/Auth";
 
 const Welcome = () => {
 
      const [info, setInfo] = React.useState();
      const isLoggedIn = Auth.hasToken();
 
-     useEffect(()=>{
-          async function getArtistCard(){
-               let html = [];
-               const response = await axios.post(`${process.env.REACT_APP_NODE_URL}artists/random`, {amount : 8});
-               if(response.data.status == 1){
-                    let icons = response.data.result
-                    icons.forEach(function(element, index) {
-                         if(index == parseInt(icons.length/2)){
-                              html.push(<div className="w-100"></div>);
-                         }
-                         html.push(
-                              <div className="artist">
-                                   <div className="artist-card">
-                                        <div className="artist-card-overlay"><h4 className="artist-card-overlay-text">Discover AESPA</h4></div>
-                                        <img width="250" src={element}/>
-                                   </div>
-                               </div>
-                         );
-                    });
+     // useEffect(()=>{
+     //      async function getArtistCard(){
+     //           let html = [];
+     //           const response = await axios.post(`${process.env.REACT_APP_NODE_URL}artists/random`, {amount : 8});
+     //           if(response.data.status == 1){
+     //                let icons = response.data.result
+     //                icons.forEach(function(element, index) {
+     //                     if(index == parseInt(icons.length/2)){
+     //                          html.push(<div className="w-100"></div>);
+     //                     }
+     //                     html.push(
+     //                          <div className="artist">
+     //                               <div className="artist-card">
+     //                                    <div className="artist-card-overlay"><h4 className="artist-card-overlay-text">Discover AESPA</h4></div>
+     //                                    <img width="250" src={element}/>
+     //                               </div>
+     //                           </div>
+     //                     );
+     //                });
 
-                    html.unshift(<div className="w-100 p-3"></div>);
-                    html.push(<div className="w-100 p-3"></div>);
-                    await setInfo(html);
-               }
-          }
-          getArtistCard();
-     }, []) 
+     //                html.unshift(<div className="w-100 p-3"></div>);
+     //                html.push(<div className="w-100 p-3"></div>);
+     //                await setInfo(html);
+     //           }
+     //      }
+     //      if(!isLoggedIn) getArtistCard();
+     // }, []) 
 
      return (
           <>

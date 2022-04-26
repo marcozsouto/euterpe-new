@@ -1,8 +1,93 @@
-html, body, #root, #root>div {
+html, body, #root, #root> div {
   height: 100%;
   width: 100%;
+  margin: 0;
 }
 
 *{
   font-family: 'Montserrat', sans-serif;
+}
+
+.form-label{
+  color: white;
+}
+
+.form-control{
+  border: 1px solid transparent;
+  border-radius: 5px;
+  margin-bottom: 0.5rem;
+  height: 40px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  text-indent: 0px;
+}
+
+.form-control::placeholder{
+  color: gray;
+}
+
+.form-control:focus{
+  border-color: rgb(240,94,84, 0.5);
+  box-shadow: 0 0 0 0.2rem rgb(240,94,84, 0.7);
+}
+
+.btn-euterpe{
+  font-weight: 600;
+  background-color: #F05E54;
+  border-color: #F05E54;
+  color: white;
+  font-size: 0.9rem;
+  padding: 5px 20px;
+}
+
+.btn-euterpe:hover{
+  color: white;
+  background-color: #f77b6e;
+  border-color: #f77b6e;
+}
+
+.btn-euterpe:focus{
+  border-color: rgb(240,94,84, 0.2);
+  box-shadow: 0 0 0 0.2rem rgb(240,94,84, 0.4);
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  input[type="password"]:not(:placeholder-shown) {
+     -webkit-text-stroke-width: 0.2em;
+     letter-spacing: 0.2em;
+  }
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+/* ::-webkit-scrollbar-track {
+} */
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: gray; 
+  border-radius: 5px;
+  transition: 0.8s; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #bbbbbb;
+  transition: 0.8s; 
+}
+
+a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, body, canvas, caption, center, cite, code, dd, del, details, dfn, div, dl, dt, em, embed, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, html, i, iframe, img, ins, kbd, label, legend, li, mark, menu, nav, object, ol, output, p, pre, q, ruby, s, samp, section, small, span, strike, strong, sub, summary, sup, table, tbody, td, tfoot, th, thead, time, tr, tt, u, ul, var, video {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  vertical-align: baseline;
+}
+
+button {
+  all: unset;
+  cursor: pointer;
 }

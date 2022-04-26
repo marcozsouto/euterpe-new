@@ -1,5 +1,5 @@
 import React from "react";
-import IconEuterpe from "../../fix/icon-euterpe/IconEuterpe";
+import IconEuterpe from '../../../fix/icon-euterpe/IconEuterpe';
 import './WelcomeFooter.css'
 
 
